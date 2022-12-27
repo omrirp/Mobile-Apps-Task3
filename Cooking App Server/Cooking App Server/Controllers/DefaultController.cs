@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace Cooking_App_Server.Controllers
 {
-    public class HomeController : Controller
+    public class DefaultController : Controller
     {
-        // GET: Home
+        // GET: Default
         public ActionResult Index()
         {
             return View();
