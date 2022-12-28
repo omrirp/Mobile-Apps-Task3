@@ -10,9 +10,9 @@ namespace Cooking_App_Server.Controllers
     public class IngredientsController : ApiController
     {
         // GET: api/Ingredients
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "jojjjpjpj", "hello2" };
+            return Ok(new string[] { "jojjjpjpj", "hello2" });
         }
 
         // GET: api/Ingredients/5
@@ -22,8 +22,9 @@ namespace Cooking_App_Server.Controllers
         }
 
         // POST: api/Ingredients
-        public void Post([FromBody]string value)
+        public string Post()
         {
+            return "call back";
         }
 
         // PUT: api/Ingredients/5
