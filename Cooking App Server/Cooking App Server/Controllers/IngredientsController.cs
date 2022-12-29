@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cooking_App_Server.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -22,9 +23,9 @@ namespace Cooking_App_Server.Controllers
         }
 
         // POST: api/Ingredients
-        public string Post()
+        public string Post([FromBody] Ingredient ing)
         {
-            return "call back";
+            return ing.addIngredient();
         }
 
         // PUT: api/Ingredients/5

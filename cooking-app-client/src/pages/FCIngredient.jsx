@@ -22,15 +22,15 @@ export default function FCIngredient(props) {
     };
 
     const submit = () => {
-        const ingredient = {
-            name: ingNameInput,
-            imageURL: ingImageUrlInput,
-            calories: ingCaloriesInput,
+        const ing = {
+            Name: ingNameInput,
+            ImageURL: ingImageUrlInput,
+            Calories: ingCaloriesInput,
         };
-        console.log(ingredient);
 
         //Make post request
-        axios.post(apiUrl, JSON.stringify({ s: 'hi' })).then((res) => {
+
+        axios.post(apiUrl, ing).then((res) => {
             console.log(res.data);
         });
     };
