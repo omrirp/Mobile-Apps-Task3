@@ -11,9 +11,10 @@ namespace Cooking_App_Server.Controllers
     public class IngredientsController : ApiController
     {
         // GET: api/Ingredients
-        public IHttpActionResult Get()
+        public List<Ingredient> Get()
         {
-            return Ok(new string[] { "jojjjpjpj", "hello2" });
+            Ingredient i = new Ingredient();
+            return i.getIngredients();
         }
 
         // GET: api/Ingredients/5
