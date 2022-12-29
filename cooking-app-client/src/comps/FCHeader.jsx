@@ -1,6 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom';
-import FCIngredient from '../pages/FCIngredient';
-import FCRecipes from '../pages/FCRecipes';
+import FCIngredientForm from '../pages/FCIngredientForm';
+import FCRecipeForm from '../pages/FCRecipeForm';
 import FCViewRecipe from '../pages/FCVeiwRecipes';
 
 export default function FCHeader() {
@@ -22,8 +22,8 @@ export default function FCHeader() {
             </div>
             <hr />
             <Routes>
-                <Route path="/addingredient" element={<FCIngredient />} />
-                <Route path="/createrecipe" element={<FCRecipes />} />
+                <Route path="/addingredient" element={<FCIngredientForm />} />
+                <Route path="/createrecipe" element={<FCRecipeForm />} />
                 <Route path="/viewrecipes" element={<FCViewRecipe />} />
             </Routes>
         </div>
