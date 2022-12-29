@@ -41,5 +41,11 @@ namespace Cooking_App_Server.Models
             DBservices ds = new DBservices();
             return ds.insertIngredient(this);
         }
+
+        public  List<Ingredient> getIngredients()
+        {
+            DBservices ds = new DBservices();
+            return ds.readIngredients();
+        }
     }
 }
