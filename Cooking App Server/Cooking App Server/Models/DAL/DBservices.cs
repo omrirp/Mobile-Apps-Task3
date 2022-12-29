@@ -60,9 +60,7 @@ namespace Cooking_App_Server.Models.DAL
             List<Ingredient> ingredients = new List<Ingredient>();
             while (dr.Read())
             {
-                string uEmail = dr["user_email"].ToString();
-                DateTime FromDate = Convert.ToDateTime(dr["from_date"]);
-                DateTime ToDate = Convert.ToDateTime(dr["to_date"]);
+                
 
                 int id = Convert.ToInt32(dr["Id"]);
                 string name = dr["name"].ToString();
