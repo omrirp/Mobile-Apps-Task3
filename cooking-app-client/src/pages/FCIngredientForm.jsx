@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function FCIngredient(props) {
+export default function FCIngredientForm(props) {
     const style = { margin: 20, width: 300 };
     const localhostNum = '44347'; //could be different for each device
     const apiUrl = `https://localhost:${localhostNum}/api/Ingredients`;
