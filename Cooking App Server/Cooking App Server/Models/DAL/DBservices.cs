@@ -30,6 +30,58 @@ namespace Cooking_App_Server.Models.DAL
             return "success ";
         }
 
+        internal string insertRecipe(Recipe recipe, List<int> ingIds)
+        {
+            SqlConnection con = Connect();
+
+            //----- Insert the Recipe to DB -----
+            SqlCommand command = new SqlCommand();
+            command.Parameters.AddWithValue("@Name", recipe.Name);
+            command.Parameters.AddWithValue("@ImageURL", recipe.ImageURL);
+            command.Parameters.AddWithValue("@CookingMethod", recipe.CookingMethod);
+            command.Parameters.AddWithValue("@Time", recipe.Time);
+            command.CommandText = "spInsertRecipe";
+            command.Connection = con;
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            command.CommandTimeout = 10; // in seconds
+            command.ExecuteNonQuery();
+            //----- Done -----
+
+            //----- Get the input Recipe Id -----
+            string commandSTR = "select Id " + "from recipes " + "where name = " + recipe.Name;
+            SqlCommand command2 = new SqlCommand(commandSTR, con);
+            command2.ExecuteNonQuery();
+            SqlDataReader dr = command2.ExecuteReader(CommandBehavior.CloseConnection);
+            int id =0;
+            while (dr.Read())// should rune only once
+            {
+                id = Convert.ToInt32(dr["Id"]);
+            }
+            if(id == 0)
+            {
+                throw new Exception("something went wrong with inserting Recipe to the DB!");
+            }
+            // ----- Done -----
+
+            //----- Insert Ids to IngredientsInRecipes table -----
+            for (int i = 0; i < ingIds.Count; i++) 
+            {
+                SqlCommand command3 = new SqlCommand();
+                command3.Parameters.AddWithValue("@RecipeId",id);
+                command3.Parameters.AddWithValue("@IngredientId", ingIds[i]);
+                command3.CommandText = "spInsertIngredientInRecipe";
+                command3.Connection = con;
+                command3.CommandType = System.Data.CommandType.StoredProcedure;
+                command3.CommandTimeout = 10; // in seconds
+                command3.ExecuteNonQuery();
+            }
+            //----- Done -----
+
+            con.Close();
+
+            return "success";
+        }
+
 
         // Connect to DB
         private SqlConnection Connect()
