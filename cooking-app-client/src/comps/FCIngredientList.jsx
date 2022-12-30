@@ -25,7 +25,6 @@ export default function FCIngredientList(props) {
     return (
         <div className='place'>
             {ingsList.map((ing) => {
-                
                 return <FCIngredient data={ing} key={ing.Id} />;
             })}
         </div>

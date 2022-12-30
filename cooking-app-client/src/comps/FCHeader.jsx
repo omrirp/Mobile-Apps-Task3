@@ -1,5 +1,7 @@
 import { Routes, Route, Link } from 'react-router-dom';
-import IngredientContextProvider, { IngredientContext } from '../FCIngredientContext';
+import IngredientContextProvider, {
+    IngredientContext,
+} from '../FCIngredientContext';
 import FCIngredientForm from '../pages/FCIngredientForm';
 import FCRecipeForm from '../pages/FCRecipeForm';
 import FCViewRecipe from '../pages/FCVeiwRecipes';
@@ -24,11 +26,12 @@ export default function FCHeader() {
             <hr />
             <IngredientContextProvider>
                 <Routes>
-                    <Route path="/addingredient" element={<FCIngredientForm />} />
-
-                    <Route path="/createrecipe" element={<FCRecipeForm />} />
-
-                    <Route path="/viewrecipes" element={<FCViewRecipe />} />
+                    <Route
+                        path='/addingredient'
+                        element={<FCIngredientForm />}
+                    />
+                    <Route path='/createrecipe' element={<FCRecipeForm />} />
+                    <Route path='/viewrecipes' element={<FCViewRecipe />} />
                 </Routes>
             </IngredientContextProvider>
         </div>
