@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import FCIngredient from './FCIngredient';
 import '../index.css';
+import { IngredientContext } from '../FCIngredientContext';
 const apiUrl = 'https://localhost:44347/api/ingredients';
 export default function FCIngredientList(props) {
     const [ingsList, setIngsList] = useState([]);

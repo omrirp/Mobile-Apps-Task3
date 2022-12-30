@@ -2,6 +2,8 @@
 // import { useContext, useEffect, useState } from 'react';
 //import axios from 'axios';
 import FCIngredientList from '../comps/FCIngredientList';
+import IngredientContextProvider from '../FCIngredientContext';
+import {IngredientContext} from '../FCIngredientContext';
 export default function FCRecipeForm() {
     //const apiUrl = 'https://localhost:44347/api/ingredients';
     let recNameInput = null;
@@ -45,7 +47,7 @@ export default function FCRecipeForm() {
                 <input style={style} onChange={addCoockingMethod} type="text" name="Coocking Method" placeholder="Coocking Method:" />
                 <input style={style} onChange={addCoockingTime} type="text" name="Coocking Time" placeholder="Coocking Time:" />
                 <input style={style} onChange={addImageURL} type="text" name="imageUrl" placeholder="imageUrl:" />
-                <span>Ingredients: {ingsMock.map((ing) => ing + ', ')}</span>
+
                 <div>
                     <button onClick={submit} className="btns">
                         Submit
@@ -53,6 +55,7 @@ export default function FCRecipeForm() {
                 </div>
                 <div>Ingredient List</div>
                 <FCIngredientList />
+                
             </div>
         </div>
     );

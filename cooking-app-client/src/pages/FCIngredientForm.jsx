@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { useContext } from 'react';
+import { IngredientContext } from '../FCIngredientContext';
 
 export default function FCIngredientForm(props) {
     const style = { margin: 20, width: 300 };
     const localhostNum = '44347'; //could be different for each device
     const apiUrl = `https://localhost:${localhostNum}/api/Ingredients`;
-
+    const {ingredientList}=useContext(IngredientContext);
     let ingNameInput = null;
     let ingCaloriesInput = null;
     let ingImageUrlInput = null;
@@ -47,6 +49,7 @@ export default function FCIngredientForm(props) {
                         Submit
                     </button>
                 </div>
+                
             </div>
         </div>
     );
