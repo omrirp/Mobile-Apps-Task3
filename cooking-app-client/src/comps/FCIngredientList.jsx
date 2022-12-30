@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import FCIngredient from './FCIngredient';
+import '../index.css';
 const apiUrl = 'https://localhost:44347/api/ingredients';
 export default function FCIngredientList(props) {
     const [ingsList, setIngsList] = useState([]);
@@ -21,9 +22,10 @@ export default function FCIngredientList(props) {
     // }, []);
 
     return (
-        <div style={{ display: 'flex', alignItem: 'center' }}>
+        <div className='place'>
             {ingsList.map((ing) => {
-                return <FCIngredient data={ing} key={ing.id} />;
+                
+                return <FCIngredient data={ing} key={ing.Id} />;
             })}
         </div>
     );

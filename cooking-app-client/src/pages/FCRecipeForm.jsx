@@ -38,9 +38,9 @@ export default function FCRecipeForm() {
     };
 
     return (
-        <div>
-            <h2>Add recipe</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', padding: 50, alignItems: 'center' }} className="form">
+        <div style={{ display: 'flex', flexDirection: 'column', padding: 50, textAlign: 'center' }}>
+            <h2>Add recipe</h2><br />
+            <div  className="form">
                 <input style={style} onChange={addRecName} type="text" name="Recipe Name" placeholder="Recipe name :" />
                 <input style={style} onChange={addCoockingMethod} type="text" name="Coocking Method" placeholder="Coocking Method:" />
                 <input style={style} onChange={addCoockingTime} type="text" name="Coocking Time" placeholder="Coocking Time:" />
