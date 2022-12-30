@@ -1,13 +1,16 @@
 // import { Component } from 'react';
 // import { useContext, useEffect, useState } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
+import { useContext } from 'react';
 import FCIngredientList from '../comps/FCIngredientList';
 import IngredientContextProvider from '../FCIngredientContext';
 import {IngredientContext} from '../FCIngredientContext';
 export default function FCRecipeForm() {
     //const apiUrl = 'https://localhost:44347/api/ingredients';
+    const localhostNum = '44347'; //could be different for each device
+    const apiUrl = `https://localhost:${localhostNum}/api/Recipes`;
     let recNameInput = null;
-    //let recCaloriesInput = null;
+    const {ingredientList}=useContext(IngredientContext);
     let recImageUrlInput = null;
     let recCoockingMethod = null;
     let recCoockingTime = null;
@@ -29,14 +32,21 @@ export default function FCRecipeForm() {
         recImageUrlInput = e.target.value;
     };
     const submit = () => {
-        const rec = {
+        const r = {
             Name: recNameInput,
             CoockingMethod: recCoockingMethod,
             CoockingTime: recCoockingTime,
-            InageURL: recImageUrlInput,
+            ImageURL: recImageUrlInput,
+            
+            
         };
-
-        console.log(rec);
+        let ingIds =ingredientList.map((ing)=>{
+            return ing.Id;
+        })
+       
+        axios.post(apiUrl,r,ingIds ).then((res) => {
+            console.log(res.data);
+        });
     };
 
     return (
@@ -47,13 +57,16 @@ export default function FCRecipeForm() {
                 <input style={style} onChange={addCoockingMethod} type="text" name="Coocking Method" placeholder="Coocking Method:" />
                 <input style={style} onChange={addCoockingTime} type="text" name="Coocking Time" placeholder="Coocking Time:" />
                 <input style={style} onChange={addImageURL} type="text" name="imageUrl" placeholder="imageUrl:" />
-
+                <br/><span>ingredients:{ingredientList.map}</span>
                 <div>
                     <button onClick={submit} className="btns">
                         Submit
                     </button>
                 </div>
-                <div>Ingredient List</div>
+                <div>Ingredient List:{ingredientList.map((ing)=>{
+                   return " "+ing.Name+ ", "
+                })}
+                </div>
                 <FCIngredientList />
                 
             </div>

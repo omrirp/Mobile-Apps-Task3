@@ -24,16 +24,13 @@ export default function FCHeader() {
                 </Link>
             </div>
             <hr />
-            <IngredientContextProvider>
-                <Routes>
-                    <Route
-                        path='/addingredient'
-                        element={<FCIngredientForm />}
-                    />
-                    <Route path='/createrecipe' element={<FCRecipeForm />} />
-                    <Route path='/viewrecipes' element={<FCViewRecipe />} />
-                </Routes>
-            </IngredientContextProvider>
+
+            <Routes>
+                <Route path='/addingredient' element={<FCIngredientForm />}/>
+                <Route path='/createrecipe' element={<IngredientContextProvider><FCRecipeForm /></IngredientContextProvider>} />
+                <Route path='/viewrecipes' element={<FCViewRecipe />} />
+            </Routes>
+
         </div>
     );
 }
