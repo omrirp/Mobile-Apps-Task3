@@ -14,8 +14,6 @@ namespace Cooking_App_Server.Models
         string cookingMethod;
         float time;
 
-        public Recipe() { }
-
         public Recipe(string name, string imageURL, string cookingMethod, float time)
         {
             Name = name;
@@ -32,6 +30,8 @@ namespace Cooking_App_Server.Models
             CookingMethod = cookingMethod;
             Time = time;
         }
+
+        public Recipe() { }
 
         internal string addRecipe(List<int> ingIds)
         {
