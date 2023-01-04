@@ -30,7 +30,7 @@ namespace Cooking_App_Server.Models.DAL
             return "success ";
         }
 
-        internal string insertRecipe(Recipe recipe, List<int> ingIds)
+        internal string insertRecipe(Recipe recipe)
         {
             SqlConnection con = Connect();
 
@@ -64,11 +64,11 @@ namespace Cooking_App_Server.Models.DAL
             // ----- Done -----
 
             //----- Insert Ids to IngredientsInRecipes table -----
-            for (int i = 0; i < ingIds.Count; i++) 
+            for (int i = 0; i < recipe.IngredientIds.Count; i++) 
             {
                 SqlCommand command3 = new SqlCommand();
                 command3.Parameters.AddWithValue("@RecipeId",id);
-                command3.Parameters.AddWithValue("@IngredientId", ingIds[i]);
+                command3.Parameters.AddWithValue("@IngredientId", recipe.IngredientIds[i]);
                 command3.CommandText = "spInsertIngredientInRecipe";
                 command3.Connection = con;
                 command3.CommandType = System.Data.CommandType.StoredProcedure;

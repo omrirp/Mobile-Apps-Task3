@@ -25,8 +25,7 @@ namespace Cooking_App_Server.Controllers
         // POST: api/Recipes
         public string Post([FromBody] Recipe r)
         {
-            return "success";
-            //return r.addRecipe(ingIds);
+            return r.addRecipe();
         }
 
         // PUT: api/Recipes/5
