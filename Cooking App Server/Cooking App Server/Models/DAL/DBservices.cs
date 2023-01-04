@@ -48,36 +48,38 @@ namespace Cooking_App_Server.Models.DAL
             //----- Done -----
 
             //----- Get the input Recipe Id -----
-            string commandSTR = "select Id " + "from recipes " + "where name = " + recipe.Name;
+            string commandSTR = "select Id " + "from recipes " + "where Name = '" + recipe.Name+"'";
             SqlCommand command2 = new SqlCommand(commandSTR, con);
             command2.ExecuteNonQuery();
             SqlDataReader dr = command2.ExecuteReader(CommandBehavior.CloseConnection);
             int id =0;
             while (dr.Read())// should rune only once
             {
-                id = Convert.ToInt32(dr["Id"]);
+                id = Convert.ToInt32(dr["Id"]);                
             }
             if(id == 0)
             {
                 throw new Exception("something went wrong with inserting Recipe to the DB!");
             }
+            con.Close();
             // ----- Done -----
 
             //----- Insert Ids to IngredientsInRecipes table -----
+            SqlConnection con2 = Connect();
             for (int i = 0; i < recipe.IngredientIds.Count; i++) 
             {
                 SqlCommand command3 = new SqlCommand();
                 command3.Parameters.AddWithValue("@RecipeId",id);
                 command3.Parameters.AddWithValue("@IngredientId", recipe.IngredientIds[i]);
                 command3.CommandText = "spInsertIngredientInRecipe";
-                command3.Connection = con;
+                command3.Connection = con2;
                 command3.CommandType = System.Data.CommandType.StoredProcedure;
                 command3.CommandTimeout = 10; // in seconds
                 command3.ExecuteNonQuery();
             }
             //----- Done -----
 
-            con.Close();
+            con2.Close();
 
             return "success";
         }

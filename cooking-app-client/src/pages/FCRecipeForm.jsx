@@ -2,7 +2,7 @@
 // import { useContext, useEffect, useState } from 'react';
 //import IngredientContextProvider from '../FCIngredientContext';
 import axios from 'axios';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import FCIngredientList from '../comps/FCIngredientList';
 import { IngredientContext } from '../FCIngredientContext';
 import Button from 'react-bootstrap/Button';
@@ -13,30 +13,31 @@ const apiUrl = `https://localhost:${localhostNum}/api/Recipes`;
 
 export default function FCRecipeForm() {
     const { ingredientList } = useContext(IngredientContext);
-    let recNameInput = null;
-    let recImageUrlInput = null;
-    let recCoockingMethod = null;
-    let recCoockingTime = null;
+    const [recNameInput, setRecNameInput] = useState('');
+    const [recImageUrlInput, setRecImageUrlInput] = useState('');
+    const [recCoockingMethod, setRecCoockingMethod] = useState('');
+    const [recCoockingTime, setRecCoockingTime] = useState('');
 
     const inputeStyle = { margin: 20, width: 300 };
 
     const addRecName = (e) => {
-        recNameInput = e.target.value;
+        setRecNameInput(e.target.value);
         //console.log(recNameInput);
     };
     const addCoockingMethod = (e) => {
-        recCoockingMethod = e.target.value;
+        setRecCoockingMethod(e.target.value);
         //console.log(recCoockingMethod);
     };
     const addCoockingTime = (e) => {
-        recCoockingTime = e.target.value;
+        setRecCoockingTime(e.target.value);
         //console.log(recCoockingTime);
     };
     const addImageURL = (e) => {
-        recImageUrlInput = e.target.value;
+        setRecImageUrlInput(e.target.value);
         //console.log(recImageUrlInput);
     };
 
+    //form e.preventDefault()
     const submit = () => {
         let ingIds = ingredientList.map((ing) => {
             return ing.Id;
