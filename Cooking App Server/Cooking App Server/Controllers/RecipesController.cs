@@ -11,9 +11,10 @@ namespace Cooking_App_Server.Controllers
     public class RecipesController : ApiController
     {
         // GET: api/Recipes
-        public IEnumerable<string> Get()
+        public List<Recipe> Get()
         {
-            return new string[] { "value1", "value2" };
+            Recipe r = new Recipe();
+            return r.getAllRecipes();
         }
 
         // GET: api/Recipes/5

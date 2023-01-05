@@ -22,19 +22,15 @@ export default function FCRecipeForm() {
 
     const addRecName = (e) => {
         setRecNameInput(e.target.value);
-        //console.log(recNameInput);
     };
     const addCoockingMethod = (e) => {
         setRecCoockingMethod(e.target.value);
-        //console.log(recCoockingMethod);
     };
     const addCoockingTime = (e) => {
         setRecCoockingTime(e.target.value);
-        //console.log(recCoockingTime);
     };
     const addImageURL = (e) => {
         setRecImageUrlInput(e.target.value);
-        //console.log(recImageUrlInput);
     };
 
     //form e.preventDefault()

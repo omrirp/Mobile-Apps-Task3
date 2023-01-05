@@ -24,6 +24,7 @@ export default function FCIngredient(props) {
             }
         }
     };
+
     return (
         <div className={data.Id} style={{ border: '1px solid black', margin: 20, float: 'left', minWidth: 300 }}>
             <h2>{data.Name}</h2>

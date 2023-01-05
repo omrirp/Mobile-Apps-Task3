@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import FCIngredient from './FCIngredient';
 import '../index.css';
-const apiUrl = 'https://localhost:44347/api/ingredients';
+
+const localhostNum = '44347'; //could be different for each device
+const apiUrl = `https://localhost:${localhostNum}/api/ingredients`;
 export default function FCIngredientList(props) {
     const [ingsList, setIngsList] = useState([]);
 
@@ -22,7 +24,7 @@ export default function FCIngredientList(props) {
     // }, []);
 
     return (
-        <div className='place'>
+        <div className='place' style={{ textAlign: 'center' }}>
             {ingsList.map((ing) => {
                 return <FCIngredient data={ing} key={ing.Id} />;
             })}

@@ -30,6 +30,54 @@ namespace Cooking_App_Server.Models.DAL
             return "success ";
         }
 
+        internal List<Recipe> readAllRecipes()
+        {
+            SqlConnection con = Connect();
+            string commandSTR = "select * from recipes";
+            SqlCommand command = new SqlCommand(commandSTR,con);
+            command.ExecuteNonQuery();
+            SqlDataReader dr = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+            //----- Read all Recipes from DB -----
+            List<Recipe> recipes = new List<Recipe>();
+            while (dr.Read())
+            {
+                int id = Convert.ToInt32(dr["Id"]);
+                string name = dr["Name"].ToString();
+                string imageURL = dr["ImageURL"].ToString();
+                string cookingMethod = dr["CookingMethod"].ToString();
+                float time = float.Parse(dr["Time"].ToString());
+                recipes.Add(new Recipe(id, name, imageURL, cookingMethod, time, 
+                    new List<int>(), new List<string>()));
+            }
+            con.Close();
+            //----- Done -----
+
+            //----- For each Recipe: fill ingredient Ids and Names Lists -----
+            
+            for (int i = 0; i < recipes.Count; i++) 
+            {
+                con = Connect();
+                SqlCommand command2 = new SqlCommand();
+                command2.Parameters.AddWithValue("@Id", recipes[i].Id);                
+                command2.CommandText = "spGetIngredientsForRecipe";
+                command2.Connection = con;
+                command2.CommandType = System.Data.CommandType.StoredProcedure;
+                command2.CommandTimeout = 10; // in seconds
+                command2.ExecuteNonQuery();
+                SqlDataReader dr2 = command2.ExecuteReader(CommandBehavior.CloseConnection);
+                //----- Read ingredient Ids and Names -----
+                while (dr2.Read())
+                {
+                    recipes[i].IngredientIds.Add(Convert.ToInt32(dr2["IngredientId"]));
+                    recipes[i].IngrediendNames.Add(dr2["Name"].ToString());
+                }
+                con.Close();
+            }            
+            //----- Done -----
+            return recipes;
+        }
+
         internal string insertRecipe(Recipe recipe)
         {
             SqlConnection con = Connect();

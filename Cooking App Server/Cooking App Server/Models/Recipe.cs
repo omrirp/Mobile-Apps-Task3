@@ -14,6 +14,7 @@ namespace Cooking_App_Server.Models
         string cookingMethod;
         float time;
         List<int> ingredientIds;
+        List<string> ingrediendNames;
 
         public Recipe(string name, string imageURL, string cookingMethod, float time, List<int> ingredientIds)
         {
@@ -24,7 +25,14 @@ namespace Cooking_App_Server.Models
             IngredientIds = ingredientIds;
         }
 
-        public Recipe(int id, string name, string imageURL, string cookingMethod, float time, List<int> ingredientIds)
+        internal List<Recipe> getAllRecipes()
+        {
+            DBservices ds = new DBservices();
+            return ds.readAllRecipes();
+        }
+
+        public Recipe(int id, string name, string imageURL, string cookingMethod,
+            float time, List<int> ingredientIds)
         {
             Id = id;
             Name = name;
@@ -34,7 +42,20 @@ namespace Cooking_App_Server.Models
             IngredientIds = ingredientIds;
         }
 
-        public Recipe() { }        
+
+        public Recipe() { }
+
+        public Recipe(int id, string name, string imageURL, string cookingMethod,
+            float time, List<int> ingredientIds, List<string> ingrediendNames)
+        {
+            Id = id;
+            Name = name;
+            ImageURL = imageURL;
+            CookingMethod = cookingMethod;
+            Time = time;
+            IngredientIds = ingredientIds;
+            IngrediendNames = ingrediendNames;
+        }
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
@@ -42,6 +63,7 @@ namespace Cooking_App_Server.Models
         public string CookingMethod { get => cookingMethod; set => cookingMethod = value; }
         public float Time { get => time; set => time = value; }
         public List<int> IngredientIds { get => ingredientIds; set => ingredientIds = value; }
+        public List<string> IngrediendNames { get => ingrediendNames; set => ingrediendNames = value; }
 
         internal string addRecipe()
         {
