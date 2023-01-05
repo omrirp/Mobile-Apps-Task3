@@ -35,13 +35,14 @@ namespace Cooking_App_Server.Models
 
         public Ingredient() { }
    
-        // add the ingredient to the DB
+        // add the Ingredient to the DB
         public string addIngredient()
         {
             DBservices ds = new DBservices();
             return ds.insertIngredient(this);
         }
 
+        // get all ingredients from the DB
         public  List<Ingredient> getIngredients()
         {
             DBservices ds = new DBservices();

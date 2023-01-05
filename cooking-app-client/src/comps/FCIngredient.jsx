@@ -17,16 +17,14 @@ export default function FCIngredient(props) {
             if (ingredientList.some((i) => i.Id === ing.Id)) {
                 let newingarr = ingredientList.filter((i) => i.Id !== e.target.className);
                 setIngredientList(newingarr);
-                console.log(newingarr);
             } else {
                 setIngredientList((prev) => [...prev, ing]);
-                console.log(ingredientList);
             }
         }
     };
 
     return (
-        <div className={data.Id} style={{ border: '1px solid black', margin: 20, float: 'left', minWidth: 300 }}>
+        <div className={data.Id} style={{ border: '1px solid black', borderRadius: 6, margin: 20, float: 'left', minWidth: 300 }}>
             <h2>{data.Name}</h2>
             <input className={data.Id} type='checkbox' onChange={changed} value={data.Name} style={{}} />
             {' Use ingredient'}

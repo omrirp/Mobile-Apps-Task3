@@ -12,10 +12,10 @@ namespace Cooking_App_Server.Models.DAL
     {
         public DBservices() {}
 
+        // Insert Ingredient to the DB
         public string insertIngredient(Ingredient ing)
         {
             SqlConnection con = Connect();
-
             SqlCommand command = new SqlCommand();
             command.Parameters.AddWithValue("@Name", ing.Name);
             command.Parameters.AddWithValue("@ImageURL", ing.ImageURL);
@@ -30,6 +30,7 @@ namespace Cooking_App_Server.Models.DAL
             return "success ";
         }
 
+        // Read all Recipes from the DB
         internal List<Recipe> readAllRecipes()
         {
             SqlConnection con = Connect();
@@ -38,7 +39,7 @@ namespace Cooking_App_Server.Models.DAL
             command.ExecuteNonQuery();
             SqlDataReader dr = command.ExecuteReader(CommandBehavior.CloseConnection);
 
-            //----- Read all Recipes from DB -----
+            //----- Read all Recipes without ingredient Ids and Names from the DB -----
             List<Recipe> recipes = new List<Recipe>();
             while (dr.Read())
             {
@@ -53,8 +54,7 @@ namespace Cooking_App_Server.Models.DAL
             con.Close();
             //----- Done -----
 
-            //----- For each Recipe: fill ingredient Ids and Names Lists -----
-            
+            //----- For each Recipe: fill ingredient Ids and Names Lists -----            
             for (int i = 0; i < recipes.Count; i++) 
             {
                 con = Connect();
@@ -78,6 +78,7 @@ namespace Cooking_App_Server.Models.DAL
             return recipes;
         }
 
+        // Insert Recipe to the DB
         internal string insertRecipe(Recipe recipe)
         {
             SqlConnection con = Connect();
@@ -101,11 +102,11 @@ namespace Cooking_App_Server.Models.DAL
             command2.ExecuteNonQuery();
             SqlDataReader dr = command2.ExecuteReader(CommandBehavior.CloseConnection);
             int id =0;
-            while (dr.Read())// should rune only once
+            while (dr.Read())// should run only once due to unique property of Recipe Name in the DB
             {
                 id = Convert.ToInt32(dr["Id"]);                
             }
-            if(id == 0)
+            if(id == 0)// check if something went wrong with the insert command
             {
                 throw new Exception("something went wrong with inserting Recipe to the DB!");
             }
@@ -130,24 +131,9 @@ namespace Cooking_App_Server.Models.DAL
             con2.Close();
 
             return "success";
-        }
+        }       
 
-
-        // Connect to DB
-        private SqlConnection Connect()
-        {
-            // read the connection string from the web.config file
-            string connectionString = WebConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
-
-            // create the connection to the db
-            SqlConnection con = new SqlConnection(connectionString);
-
-            // open the database connection
-            con.Open();
-
-            return con;
-        }
-
+        // Read all Ingredients from the DB
         internal List<Ingredient> readIngredients()
         {            
             SqlConnection con = Connect();
@@ -161,9 +147,7 @@ namespace Cooking_App_Server.Models.DAL
             SqlDataReader dr = command.ExecuteReader(CommandBehavior.CloseConnection);
             List<Ingredient> ingredients = new List<Ingredient>();
             while (dr.Read())
-            {
-                
-
+            {                
                 int id = Convert.ToInt32(dr["Id"]);
                 string name = dr["name"].ToString();
                 string imageURL = dr["ImageURL"].ToString();
@@ -173,6 +157,18 @@ namespace Cooking_App_Server.Models.DAL
             con.Close();
 
             return ingredients;
+        }
+
+        // Connect to DB
+        private SqlConnection Connect()
+        {
+            // read the connection string from the web.config file
+            string connectionString = WebConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString;
+            // create the connection to the db
+            SqlConnection con = new SqlConnection(connectionString);
+            // open the database connection
+            con.Open();
+            return con;
         }
     }
 }

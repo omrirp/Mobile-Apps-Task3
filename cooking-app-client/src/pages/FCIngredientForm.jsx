@@ -2,14 +2,12 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-//import { useContext } from 'react';
-//import { IngredientContext } from '../FCIngredientContext';
+
+const style = { margin: 20, width: 300 };
+const localhostNum = '44347'; //could be different for each device
+const apiUrl = `https://localhost:${localhostNum}/api/Ingredients`;
 
 export default function FCIngredientForm(props) {
-    const style = { margin: 20, width: 300 };
-    const localhostNum = '44347'; //could be different for each device
-    const apiUrl = `https://localhost:${localhostNum}/api/Ingredients`;
-    //const { ingredientList } = useContext(IngredientContext);
     let [ingNameInput, setIngNameInput] = useState('');
     let [ingCaloriesInput, setIngCaloriesInput] = useState('');
     let [ingImageUrlInput, setIngImageUrlInput] = useState('');
@@ -33,10 +31,8 @@ export default function FCIngredientForm(props) {
             Calories: ingCaloriesInput,
         };
 
-        //Make post request
-
         axios.post(apiUrl, ing).then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
         });
     };
 

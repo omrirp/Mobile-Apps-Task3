@@ -4,6 +4,7 @@ import FCRecipe from '../comps/FCRecipe';
 
 const localhostNum = '44347'; //could be different for each device
 const apiUrl = `https://localhost:${localhostNum}/api/Recipes`;
+
 export default function FCViewRecipe() {
     const [recipes, setRecipes] = useState([]);
 

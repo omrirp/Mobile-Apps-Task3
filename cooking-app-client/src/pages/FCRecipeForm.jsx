@@ -1,6 +1,3 @@
-// import { Component } from 'react';
-// import { useContext, useEffect, useState } from 'react';
-//import IngredientContextProvider from '../FCIngredientContext';
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import FCIngredientList from '../comps/FCIngredientList';
@@ -34,6 +31,7 @@ export default function FCRecipeForm() {
     };
 
     //form e.preventDefault()
+    //next time with form
     const submit = () => {
         let ingIds = ingredientList.map((ing) => {
             return ing.Id;
@@ -48,7 +46,7 @@ export default function FCRecipeForm() {
         };
 
         axios.post(apiUrl, recipe).then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
         });
     };
 

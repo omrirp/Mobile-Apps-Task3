@@ -25,12 +25,6 @@ namespace Cooking_App_Server.Models
             IngredientIds = ingredientIds;
         }
 
-        internal List<Recipe> getAllRecipes()
-        {
-            DBservices ds = new DBservices();
-            return ds.readAllRecipes();
-        }
-
         public Recipe(int id, string name, string imageURL, string cookingMethod,
             float time, List<int> ingredientIds)
         {
@@ -65,10 +59,18 @@ namespace Cooking_App_Server.Models
         public List<int> IngredientIds { get => ingredientIds; set => ingredientIds = value; }
         public List<string> IngrediendNames { get => ingrediendNames; set => ingrediendNames = value; }
 
+        // add Recipe to the DB
         internal string addRecipe()
         {
             DBservices ds = new DBservices();
             return ds.insertRecipe(this);
+        }
+
+        // read all Recipes from the DB
+        internal List<Recipe> getAllRecipes()
+        {
+            DBservices ds = new DBservices();
+            return ds.readAllRecipes();
         }
     }
 }
