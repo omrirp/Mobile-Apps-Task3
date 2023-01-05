@@ -18,9 +18,11 @@ export default function FCViewRecipe() {
         <div
             style={{
                 display: 'flex',
-                flexDirection: 'column',
+                justifyContent: 'center',
+                flexWrap: 'wrap',
                 padding: 50,
                 alignItems: 'center',
+                margin: 'auto',
             }}
         >
             {recipes.map((rec) => {

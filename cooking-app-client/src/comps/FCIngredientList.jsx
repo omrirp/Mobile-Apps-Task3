@@ -24,7 +24,7 @@ export default function FCIngredientList(props) {
     // }, []);
 
     return (
-        <div className='place' style={{ textAlign: 'center' }}>
+        <div className='place'>
             {ingsList.map((ing) => {
                 return <FCIngredient data={ing} key={ing.Id} />;
             })}
